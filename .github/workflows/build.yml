@@ -2,7 +2,7 @@ name: build-test-deploy
 on:
   push:
     branches:
-      - main  # Adjust for your deployment branch
+      - main  
 
 jobs:
   build:
@@ -14,13 +14,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'  # Updated to use the latest Node.js version
+          node-version: '20.x'  
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
-        run: npm run build  # This will output to the 'dist' directory by default for Vite
+        run: npm run build  
 
   test:
     needs: build
@@ -38,7 +38,7 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test  # Ensure you have a test script or remove this step if not applicable
+        run: npm test  
 
   deploy:
     #needs: test
@@ -72,7 +72,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "dist"  # Ensure this matches Vite's output directory
+          path: "dist"  
 
       - name: Deploy
         id: deployment
