@@ -2,7 +2,7 @@ name: build-test-deploy
 on:
   push:
     branches:
-      - main  # Adjust this if you use a different branch for deployment
+      - main  # Adjust for your deployment branch
 
 jobs:
   build:
@@ -14,13 +14,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'  # Use the latest supported Node.js version
+          node-version: '20.x'  # Updated to use the latest Node.js version
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
-        run: npm run build  # Vite will build and output to the 'dist' folder
+        run: npm run build  # This will output to the 'dist' directory by default for Vite
 
   test:
     needs: build
@@ -38,10 +38,10 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test  # Adjust if your Vue.js project doesn't include tests
+        run: npm test  # Ensure you have a test script or remove this step if not applicable
 
   deploy:
-   # needs: test  # Ensure deploy only runs after tests pass
+    #needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -67,12 +67,12 @@ jobs:
         run: npm install
 
       - name: Build for deployment
-        run: npm run build  # Ensure this matches your Vue.js build script
+        run: npm run build
 
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "dist"  # Matches Vite's default output directory
+          path: "dist"  # Ensure this matches Vite's output directory
 
       - name: Deploy
         id: deployment
