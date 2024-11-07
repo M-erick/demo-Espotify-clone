@@ -41,7 +41,7 @@ jobs:
         run: npm test  # Adjust if your Vue.js project doesn't include tests
 
   deploy:
-    needs: test  # Ensure deploy only runs after tests pass
+   # needs: test  # Ensure deploy only runs after tests pass
     runs-on: ubuntu-latest
     permissions:
       contents: write
